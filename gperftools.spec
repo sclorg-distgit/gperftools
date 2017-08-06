@@ -7,7 +7,7 @@
 
 Name:		%{?scl_prefix}gperftools
 Version:	2.5
-Release:	3%{?dist}
+Release:	4%{?dist}
 License:	BSD
 Group:		Development/Tools
 Summary:	Very fast malloc and performance analysis tools
@@ -19,7 +19,9 @@ ExcludeArch:	s390
 BuildRequires:	%{?scl_prefix}libunwind-devel
 %endif
 Requires:	%{?scl_prefix}gperftools-devel = %{version}-%{release}
+%if 0%{!?scl:1}
 Requires:	%{?scl_prefix}pprof = %{version}-%{release}
+%endif
 
 # we don't want to require or provide any pkgconfig(xxx) symbols
 %global __pkgconfig_requires ""
@@ -157,6 +159,9 @@ set -e
 
 
 %changelog
+* Fri Jun 23 2017 Marek Skalický <mskalick@redhat.com> - 2.5-4
+- Remove pprof dependency
+
 * Thu Jun 15 2017 Marek Skalický <mskalick@redhat.com> - 2.5-3
 - Rebase to gperftools 2.5 from Fedora 25 and convert it to SCL
 
